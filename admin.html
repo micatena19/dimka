@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Panel · dimka.cm</title>
+<style>
+:root{--cream:#fff8ee;--brown:#442f2a;--blush:#f5c8d7;--pinky:#b12b5c}
+*{box-sizing:border-box}
+body{background:var(--cream);color:var(--brown);font:400 1rem/1.5 system-ui,sans-serif;padding:1.25rem;max-width:640px;margin:auto}
+h1,h2{line-height:1.1}
+label{display:block;margin:.6rem 0 .2rem;font-weight:600;font-size:.9rem}
+input,textarea{width:100%;padding:.7rem;border:2px solid var(--brown);border-radius:12px;background:#fff;font:inherit;color:inherit;margin-top:.2rem}
+fieldset{border:2px solid var(--blush);border-radius:16px;margin:1rem 0;padding:.5rem 1rem 1rem}
+button{background:var(--pinky);color:#fff;border:0;border-radius:999px;padding:.8rem 1.4rem;font:600 1rem system-ui,sans-serif;cursor:pointer;margin-top:.8rem}
+#msg{margin:1rem 0;font-weight:600;min-height:1.5rem}
+.save{position:sticky;bottom:0;background:var(--cream);padding:.8rem 0}
+:focus-visible{outline:3px solid var(--pinky);outline-offset:2px}
+</style></head><body>
+<h1>Panel de dimka.cm</h1>
+<fieldset><legend>Conexión con GitHub</legend>
+<label>Tu usuario de GitHub<input id="u" autocomplete="off"></label>
+<label>Nombre del repositorio<input id="r" autocomplete="off"></label>
+<label>Token de acceso<input id="t" type="password" autocomplete="off"></label>
+<button id="load" type="button">Cargar datos</button></fieldset>
+<div id="msg" role="status" aria-live="polite"></div>
+<div id="form"></div>
+<div class="save" id="sv" hidden><button id="save" type="button">Guardar cambios</button></div>
+<script>
+const $=s=>document.querySelector(s);let D,sha;
+const cfg=JSON.parse(localStorage.getItem("cfg")||"{}");
+for(const k of["u","r","t"])$("#"+k).value=cfg[k]||"";
+const url=()=>`https://api.github.com/repos/${$("#u").value.trim()}/${$("#r").value.trim()}/contents/data.json`;
+const hd=()=>({Authorization:"Bearer "+$("#t").value.trim(),Accept:"application/vnd.github+json"});
+const say=t=>$("#msg").textContent=t;
+const esc=v=>String(v).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const get=(o,p)=>p.split(".").reduce((a,k)=>a[k],o);
+const f=(l,p,n)=>`<label>${l}<input data-p="${p}" ${n?'type="number"':""} value="${esc(get(D,p))}"></label>`;
+function render(){
+ let h="<h2>Contacto</h2>"+f("WhatsApp (con código de país, sin + ni espacios)","wa")+f("Instagram (link)","ig")+f("Mail","mail");
+ h+="<h2>Planes</h2>"+D.planes.map((p,i)=>`<fieldset>${f("Nombre",`planes.${i}.n`)}${f("Precio",`planes.${i}.p`,1)}<label>Qué incluye (una línea por ítem)<textarea data-p="planes.${i}.items" data-l="1" rows="5">${esc(p.items.join("\n"))}</textarea></label></fieldset>`).join("");
+ h+="<h2>Extras</h2>"+D.extras.map((e,i)=>`<fieldset>${f("Nombre",`extras.${i}.n`)}${f("Precio",`extras.${i}.p`,1)}</fieldset>`).join("");
+ h+="<h2>Diseño web</h2>"+f("Título","web.t")+f("Texto","web.d")+f("Precio (texto)","web.p");
+ $("#form").innerHTML=h;
+}
+$("#load").onclick=async()=>{
+ try{say("Cargando…");
+  const r=await fetch(url(),{headers:hd(),cache:"no-store"});
+  if(!r.ok)throw new Error(r.status===404?"No encuentro data.json en ese repositorio.":"No pude conectar: revisá usuario, repositorio y token.");
+  const j=await r.json();sha=j.sha;
+  D=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));
+  localStorage.setItem("cfg",JSON.stringify({u:$("#u").value,r:$("#r").value,t:$("#t").value}));
+  render();$("#sv").hidden=false;say("Listo, ya podés editar.");
+ }catch(e){say(e.message)}
+};
+$("#save").onclick=async()=>{
+ try{say("Guardando…");
+  document.querySelectorAll("[data-p]").forEach(el=>{const ks=el.dataset.p.split(".");const last=ks.pop();const o=ks.reduce((a,k)=>a[k],D);o[last]=el.dataset.l?el.value.split("\n").map(x=>x.trim()).filter(Boolean):el.type==="number"?Number(el.value):el.value});
+  const body={message:"Actualización desde el panel",sha,content:btoa(unescape(encodeURIComponent(JSON.stringify(D,null,1))))};
+  const r=await fetch(url(),{method:"PUT",headers:hd(),body:JSON.stringify(body)});
+  if(!r.ok)throw new Error("No se pudo guardar. Revisá que el token tenga permiso de escritura en Contents.");
+  sha=(await r.json()).content.sha;say("Guardado. En 1 o 2 minutos se ve en la web.");
+ }catch(e){say(e.message)}
+};
+</script>
+</body></html>
