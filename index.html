@@ -88,7 +88,6 @@ footer a{margin:0 .6rem}
 .cf-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem}
 .cf-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:background .3s,transform .3s}
 .cf-dots button.on{background:var(--pinky);transform:scale(1.3)}
-.cf-ib{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,248,238,.88);color:var(--brown);font:600 1.3rem/1 Montserrat,sans-serif;cursor:pointer}.cf-ip{left:8px}.cf-in{right:8px}.cf-i.act .cf-ib{display:block}
 .js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
 .js .rv.in{opacity:1;transform:none}
 @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
@@ -210,7 +209,7 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
  if(T.length){
   const wrap=$("#work"),box=$("#cf");
   wrap.innerHTML=T.map(x=>{const L=x.imgs&&x.imgs.length?x.imgs:[x.img];const ok=/^https?:\/\//.test(x.l||"");
-   return `<div class="cf-i" role="group" aria-label="${E(x.t||"Trabajo")}">${L.map((p,k)=>`<img class="cf-s" src="${E(p)}" alt="${E(x.t||"Trabajo de dimka.cm")}">`).join("")}${L.length>1?`<span class="cf-sd">${L.map(()=>"<i></i>").join("")}</span><button class="cf-ib cf-ip" type="button" aria-label="Imagen anterior">‹</button><button class="cf-ib cf-in" type="button" aria-label="Imagen siguiente">›</button>`:""}${ok?`<a class="cf-l" href="${E(x.l)}" target="_blank" rel="noopener">${/reel/.test(x.l)?"▶ Ver reel":"Ver publicación"}</a>`:""}</div>`}).join("");
+   return `<div class="cf-i" role="group" aria-label="${E(x.t||"Trabajo")}">${L.map((p,k)=>`<img class="cf-s" src="${E(p)}" alt="${E(x.t||"Trabajo de dimka.cm")}">`).join("")}${L.length>1?`<span class="cf-sd">${L.map(()=>"<i></i>").join("")}</span>`:""}${ok?`<a class="cf-l" href="${E(x.l)}" target="_blank" rel="noopener">${/reel/.test(x.l)?"▶ Ver reel":"Ver publicación"}</a>`:""}</div>`}).join("");
   const els=[...wrap.children],n=els.length,dots=$("#dots");
   dots.innerHTML=T.map((_,i)=>`<button type="button" aria-label="Trabajo ${i+1}"></button>`).join("");
   let a=0,sl=0;
@@ -237,17 +236,12 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
   const play=()=>{clearInterval(tm);if(!reduce&&n>1&&!hold&&vis)tm=setInterval(tick,2600)};
   const touch=()=>{hold=true;clearTimeout(ht);ht=setTimeout(()=>{hold=false;play()},9000);play()};
   els.forEach((el,i)=>el.addEventListener("click",()=>{if(i!==a){touch();go(i)}}));
-  els.forEach(el=>{const c=el.querySelectorAll(".cf-s").length,p=el.querySelector(".cf-ip"),q=el.querySelector(".cf-in");
-   if(p){p.onclick=e=>{e.stopPropagation();touch();sl=(sl-1+c)%c;draw()};q.onclick=e=>{e.stopPropagation();touch();sl=(sl+1)%c;draw()}}});
   box.querySelector(".cf-p").onclick=()=>{touch();go(a-1)};
   box.querySelector(".cf-n").onclick=()=>{touch();go(a+1)};
   dots.onclick=e=>{const i=[...dots.children].indexOf(e.target.closest("button"));if(i>=0){touch();go(i)}};
-  let x0=null,tg=null;
-  box.addEventListener("pointerdown",e=>{if(e.target.closest(".cf-ib,.cf-l,.cf-b")){x0=null;return}x0=e.clientX;tg=e.target.closest(".cf-i")});
-  box.addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)<=50)return;touch();
-   const c=tg?tg.querySelectorAll(".cf-s").length:0;
-   if(tg&&tg===els[a]&&c>1){if(dx<0){if(sl<c-1){sl++;draw()}else go(a+1)}else{if(sl>0){sl--;draw()}else go(a-1)}}
-   else go(a+(dx<0?1:-1))});
+  let x0=null;
+  box.addEventListener("pointerdown",e=>{x0=e.clientX});
+  box.addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>50){touch();go(a+(dx<0?1:-1))}});
   box.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){touch();go(a+1)}if(e.key==="ArrowLeft"){touch();go(a-1)}});
   box.addEventListener("mouseenter",()=>{hold=true;play()});
   box.addEventListener("mouseleave",()=>{hold=false;play()});
@@ -256,7 +250,7 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
   draw();
  }else $("#trabajos").style.display="none";
  if(R.length)$("#quotes").innerHTML=R.map(x=>`<figure><blockquote>“${E(x.txt)}”</blockquote><figcaption>${E(x.n)}</figcaption></figure>`).join("");else{$("#rt2").style.display=$("#rl").style.display=$("#quotes").style.display="none";if(location.hash!=="#resenas")$("#resenas").style.display="none"}
- $("#ig").href=D.ig;$("#mail").href="mailto:"+D.mail;$("#mail".textContent=D.mail;
+ $("#ig").href=D.ig;$("#mail").href="mailto:"+D.mail;$("#mail").textContent=D.mail;
 }).catch(e=>console.error("No se pudo cargar data.json",e));
 </script>
 </body>
