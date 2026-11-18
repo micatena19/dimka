@@ -1,16 +1,63 @@
 {
- "wa": "5490000000000",
- "ig": "https://instagram.com/",
+ "wa": "542227482381",
+ "ig": "https://www.instagram.com/dimka.cm?lqvp=MXN3cnJwbmhrNW92dg==",
  "mail": "dimkamkt@gmail.com",
  "planes": [
-  {"id":"inicial","n":"Plan Inicial","p":170000,"items":["1 jornada presencial (hasta 2 hs)","4 publicaciones en feed (2 reels, 1 carrusel, 1 foto)","Hasta 10 historias mensuales","Planificación, edición y redacción"]},
-  {"id":"crecimiento","n":"Plan Crecimiento","p":210000,"items":["1 jornada presencial (hasta 3 hs)","6 publicaciones en feed (3 reels, 2 carruseles, 1 foto)","Hasta 12 historias mensuales","Planificación, edición y redacción"]},
-  {"id":"impulso","n":"Plan Impulso","p":250000,"items":["1 jornada presencial (hasta 4 hs)","8 publicaciones en feed (4 reels, 2 carruseles, 2 fotos)","Hasta 16 historias mensuales","Planificación, edición y redacción"]}
+  {
+   "id": "inicial",
+   "n": "Plan Inicial",
+   "p": 180000,
+   "items": [
+    "1 jornada presencial (hasta 2 hs)",
+    "4 publicaciones en feed (2 reels, 1 carrusel, 1 foto)",
+    "Hasta 10 historias mensuales",
+    "Planificación, edición y redacción"
+   ]
+  },
+  {
+   "id": "crecimiento",
+   "n": "Plan Crecimiento",
+   "p": 230000,
+   "items": [
+    "1 jornada presencial (hasta 3 hs)",
+    "6 publicaciones en feed (3 reels, 2 carruseles, 1 foto)",
+    "Hasta 12 historias mensuales",
+    "Planificación, edición y redacción"
+   ]
+  },
+  {
+   "id": "impulso",
+   "n": "Plan Impulso",
+   "p": 280000,
+   "items": [
+    "1 jornada presencial (hasta 4 hs)",
+    "8 publicaciones en feed (4 reels, 2 carruseles, 2 fotos)",
+    "Hasta 16 historias mensuales",
+    "Planificación, edición y redacción"
+   ]
+  }
  ],
  "extras": [
-  {"id":"pieza","n":"Pieza gráfica extra","p":12000},
-  {"id":"video","n":"Edición de un video","p":20000},
-  {"id":"marca","n":"Identidad visual (pago único)","p":70000,"max":1}
+  {
+   "id": "pieza",
+   "n": "Pieza gráfica extra",
+   "p": 12000
+  },
+  {
+   "id": "video",
+   "n": "Edición de un video",
+   "p": 20000
+  },
+  {
+   "id": "marca",
+   "n": "Identidad visual (pago único)",
+   "p": 70000,
+   "max": 1
+  }
  ],
- "web": {"t":"Diseño web","d":"Tu página hecha a medida, con un panel para que cambies textos y precios vos mismo.","p":"A cotizar"}
+ "web": {
+  "t": "Diseño web",
+  "d": "Tu página hecha a medida, con un panel para que cambies textos y precios vos mismo.",
+  "p": "A cotizar"
+ }
 }
