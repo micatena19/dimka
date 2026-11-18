@@ -64,7 +64,7 @@ figcaption{font-weight:600;font-size:.9rem}
 .contact{background:var(--blush);max-width:none}
 .contact>div{max-width:1000px;margin:auto}
 form{display:grid;gap:.8rem;max-width:480px;margin-top:1.2rem}
-input[type=text],textarea{width:100%;border:2px solid var(--brown);background:var(--cream);border-radius:14px;padding:.8rem 1rem;font:inherit;color:inherit}
+input[type=text],textarea,select{width:100%;border:2px solid var(--brown);background:var(--cream);border-radius:14px;padding:.8rem 1rem;font:inherit;color:inherit}
 footer{padding:2rem 1.25rem;text-align:center;font-size:.9rem}
 footer a{margin:0 .6rem}
 .steps{list-style:none;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));counter-reset:s}
@@ -83,11 +83,24 @@ footer a{margin:0 .6rem}
 .cf-sd i.on{background:#fff}
 .cf-l{display:none;position:absolute;left:12px;bottom:12px;background:var(--pinky);color:#fff;border-radius:999px;padding:.45rem .9rem;font:600 .85rem Montserrat,sans-serif;text-decoration:none}
 .cf-i.act .cf-l{display:inline-block}
-.cf-b{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:44px;height:44px;border-radius:50%;border:0;background:var(--cream);color:var(--brown);font:600 1.6rem/1 Montserrat,sans-serif;cursor:pointer;box-shadow:0 4px 12px rgba(68,47,42,.2)}
-.cf-p{left:.8rem}.cf-n{right:.8rem}
+.cf-b{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:36px;height:36px;border-radius:50%;border:0;background:var(--cream);color:var(--brown);font:600 1.6rem/1 Montserrat,sans-serif;cursor:pointer;box-shadow:0 4px 12px rgba(68,47,42,.2)}
+.cf-p{left:.15rem}.cf-n{right:.15rem}
 .cf-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem}
 .cf-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:background .3s,transform .3s}
 .cf-dots button.on{background:var(--pinky);transform:scale(1.3)}
+.cf-ib{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:36px;height:36px;border-radius:50%;border:0;background:rgba(255,248,238,.88);color:var(--brown);font:600 1.3rem/1 Montserrat,sans-serif;cursor:pointer}.cf-ip{left:8px}.cf-in{right:8px}.cf-i.act .cf-ib{display:block}
+.rv-h{display:flex;gap:.8rem;align-items:center;margin-bottom:.8rem}
+.av{flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--blush);display:grid;place-items:center;font:800 1.3rem "League Spartan",sans-serif}
+figcaption a{font-weight:400}
+.mq{overflow:hidden;background:var(--brown);color:var(--cream);padding:.9rem 0;white-space:nowrap}
+.mq-t{display:inline-flex;animation:mq 30s linear infinite;font:800 1.3rem "League Spartan",sans-serif}
+.mq-t span{margin-right:2rem}.mq-t span:nth-child(even){color:var(--blush)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.bar{position:fixed;top:0;left:0;right:0;height:3px;background:var(--pinky);transform:scaleX(0);transform-origin:left;z-index:100}
+.stars{will-change:transform}
+.js .rvi{opacity:0}.js .rvi.in{opacity:1;animation:up .7s var(--d,0s) backwards}
+.benefits>div{transition:transform .25s}.benefits>div:hover{transform:translateY(-6px)}
+.plan:has(input:checked){transform:scale(1.02)}
 .js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
 .js .rv.in{opacity:1;transform:none}
 @keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
@@ -101,6 +114,7 @@ footer a{margin:0 .6rem}
 </style>
 </head>
 <body>
+<div class="bar" id="bar"></div>
 <nav><a class="logo" href="#">dimka</a><a href="#contacto" class="btn alt">Escribinos</a></nav>
 
 <section class="hero"><div>
@@ -110,6 +124,8 @@ footer a{margin:0 .6rem}
 <a class="btn" href="#plan">Armá tu plan</a><a class="btn alt" href="#marca">Revisá tu marca</a>
 <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1l2.6 7.2 7.6.3-6 4.7 2.1 7.4L12 16.2 5.7 20.6l2.1-7.4-6-4.7 7.6-.3z"/></svg><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0l2 9 10 3-10 3-2 9-2-9-10-3 10-3z"/></svg><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1l2.6 7.2 7.6.3-6 4.7 2.1 7.4L12 16.2 5.7 20.6l2.1-7.4-6-4.7 7.6-.3z"/></svg></div>
 </div></section>
+
+<div class="mq" aria-hidden="true"><div class="mq-t"><span>Redes sociales</span><span>✦</span><span>Diseño</span><span>✦</span><span>Identidad visual</span><span>✦</span><span>Edición de video</span><span>✦</span><span>Páginas web</span><span>✦</span><span>Estrategia</span><span>✦</span><span>Redes sociales</span><span>✦</span><span>Diseño</span><span>✦</span><span>Identidad visual</span><span>✦</span><span>Edición de video</span><span>✦</span><span>Páginas web</span><span>✦</span><span>Estrategia</span><span>✦</span></div></div>
 
 <section id="servicios">
 <h2 data-t="serv_t">Más que manejo de redes</h2>
@@ -128,7 +144,7 @@ footer a{margin:0 .6rem}
 <div class="plans" id="plans" role="radiogroup" aria-label="Plan base"></div>
 <h3 style="margin-bottom:.4rem">Sumá extras</h3>
 <div id="extras"></div>
-<div class="total"><div>Estimado del primer mes<br><strong id="total">$0</strong></div><a class="btn" id="wa" href="#" target="_blank" rel="noopener">Pedir este plan por WhatsApp</a></div>
+<div class="total"><div><span id="tl">Estimado del primer mes</span><br><strong id="total">$0</strong></div><a class="btn" id="wa" href="#" target="_blank" rel="noopener">Pedir este plan por WhatsApp</a></div>
 <p class="note" data-t="plan_n">Todos los planes incluyen jornada presencial. Los formatos varían según la estrategia de cada mes. Es un estimado: el precio final se confirma después de hablar con vos.</p>
 </section>
 
@@ -156,8 +172,10 @@ footer a{margin:0 .6rem}
 <h2 id="rt2" data-t="res_t">Quienes confiaron en nosotras</h2>
 <p class="lead" id="rl" data-t="res_d">Marcas que confiaron en nosotras.</p>
 <div class="quotes" id="quotes"></div>
-<h3 style="margin:2.5rem 0 .6rem">Dejanos tu reseña</h3>
+<h3 style="margin:2.5rem 0 .3rem">Dejanos tu reseña</h3>
+<p class="note" style="margin-bottom:.6rem">Revisamos cada reseña antes de publicarla.</p>
 <form id="rv"><input type="text" id="rn" placeholder="Tu nombre y tu marca" aria-label="Tu nombre y tu marca" required><textarea id="rt" rows="3" placeholder="¿Cómo fue trabajar con nosotras?" aria-label="Tu reseña" required></textarea><button class="btn" type="submit">Enviar reseña</button></form>
+<p id="rok" class="note" role="status" style="margin-top:.8rem"></p>
 </section>
 
 <section class="contact" id="contacto"><div style="padding:4rem 1.25rem">
@@ -176,18 +194,20 @@ footer a{margin:0 .6rem}
 const $=s=>document.querySelector(s);
 const fmt=n=>"$"+n.toLocaleString("es-AR");
 document.documentElement.classList.add("js");
+{const st=document.querySelector(".stars"),bar=$("#bar"),rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+addEventListener("scroll",()=>{const h=document.documentElement;bar.style.transform=`scaleX(${h.scrollTop/((h.scrollHeight-h.clientHeight)||1)})`;if(st&&!rm)st.style.transform=`translateY(${scrollY*-.14}px)`},{passive:true})}
 {const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll("section:not(.hero)").forEach(el=>{el.classList.add("rv");io.observe(el)})}
 fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
  const wa=t=>`https://wa.me/${D.wa}?text=`+encodeURIComponent(t);
- let plan=D.planes[0].id;const qty={};
- $("#plans").innerHTML=D.planes.map((p,i)=>`<label class="plan"><input type="radio" name="plan" value="${p.id}" ${i?"":"checked"}><b>${p.n}</b><span>${fmt(p.p)} / mes</span><ul>${p.items.map(x=>`<li>${x}</li>`).join("")}</ul></label>`).join("");
+ const P=[...D.planes,{id:"none",n:"Solo piezas sueltas",p:0,items:["Sin plan mensual","Elegí abajo las piezas que necesitás"]}];let plan=P[0].id;const qty={};
+ $("#plans").innerHTML=P.map((p,i)=>`<label class="plan"><input type="radio" name="plan" value="${p.id}" ${i?"":"checked"}><b>${p.n}</b><span>${p.id==="none"?"Pagás por pieza":fmt(p.p)+" / mes"}</span><ul>${p.items.map(x=>`<li>${x}</li>`).join("")}</ul></label>`).join("");
  $("#extras").innerHTML=D.extras.map(e=>{qty[e.id]=0;return `<div class="extra"><span>${e.n}<br><small>${fmt(e.p)} c/u</small></span><span class="step"><button type="button" data-i="${e.id}" data-d="-1" aria-label="Quitar ${e.n}">−</button><b id="q-${e.id}" aria-live="polite">0</b><button type="button" data-i="${e.id}" data-d="1" aria-label="Sumar ${e.n}">+</button></span></div>`}).join("");
  function calc(){
-  const p=D.planes.find(x=>x.id===plan);let t=p.p;const items=[p.n];
+  const p=P.find(x=>x.id===plan);let t=p.p;const items=p.id==="none"?[]:[p.n];
   D.extras.forEach(e=>{const c=qty[e.id];$("#q-"+e.id).textContent=c;if(c){t+=c*e.p;items.push(`${c} x ${e.n}`)}});
-  $("#total").textContent=fmt(t);
-  $("#wa").href=wa(`Hola! Quiero cotizar: ${items.join(", ")}. Estimado: ${fmt(t)}.`);
+  $("#total").textContent=fmt(t);$("#tl").textContent=p.id==="none"?"Estimado":"Estimado del primer mes";
+  $("#wa").href=wa(items.length?`Hola! Quiero cotizar: ${items.join(", ")}. Estimado: ${fmt(t)}.`:"Hola! Quiero consultar por piezas sueltas.");
  }
  $("#plans").addEventListener("change",e=>{plan=e.target.value;calc()});
  $("#extras").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const x=D.extras.find(z=>z.id===b.dataset.i);qty[x.id]=Math.max(0,Math.min(x.max||20,qty[x.id]+Number(b.dataset.d)));calc()});
@@ -202,14 +222,16 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
  $("#wt").textContent=D.web.t;$("#wd").textContent=D.web.d;$("#wp").textContent=D.web.p;
  $("#wa3").href=wa("Hola! Quiero consultar por una página web.");
  $("#f").addEventListener("submit",e=>{e.preventDefault();window.open(wa(`Hola! Soy ${$("#n").value}. ${$("#m").value}`),"_blank")});
- $("#rv").addEventListener("submit",e=>{e.preventDefault();location.href=`mailto:${D.mail}?subject=`+encodeURIComponent("Reseña para dimka.cm")+"&body="+encodeURIComponent($("#rt").value+"\n\n"+$("#rn").value)});
+ $("#rv").addEventListener("submit",e=>{e.preventDefault();location.href=`mailto:${D.mail}?subject=`+encodeURIComponent("Reseña para dimka.cm")+"&body="+encodeURIComponent($("#rt").value+"\n\n"+$("#rn").value);$("#rok").textContent="¡Gracias! Tu reseña le llegó a nuestro equipo. La publicamos después de revisarla.";$("#rv").reset()});
+ {const io2=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io2.unobserve(e.target)}}),{threshold:.15});
+ document.querySelectorAll(".benefits>div,.q").forEach((el,i)=>{el.classList.add("rvi");el.style.setProperty("--d",(i%4)*.12+"s");io2.observe(el)})}
  const TX=D.textos||{};document.querySelectorAll("[data-t]").forEach(el=>{const v=TX[el.dataset.t];if(v)el.textContent=v});
  const E=v=>String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
  const T=D.trabajos||[],R=D.resenas||[];
  if(T.length){
   const wrap=$("#work"),box=$("#cf");
   wrap.innerHTML=T.map(x=>{const L=x.imgs&&x.imgs.length?x.imgs:[x.img];const ok=/^https?:\/\//.test(x.l||"");
-   return `<div class="cf-i" role="group" aria-label="${E(x.t||"Trabajo")}">${L.map((p,k)=>`<img class="cf-s" src="${E(p)}" alt="${E(x.t||"Trabajo de dimka.cm")}">`).join("")}${L.length>1?`<span class="cf-sd">${L.map(()=>"<i></i>").join("")}</span>`:""}${ok?`<a class="cf-l" href="${E(x.l)}" target="_blank" rel="noopener">${/reel/.test(x.l)?"▶ Ver reel":"Ver publicación"}</a>`:""}</div>`}).join("");
+   return `<div class="cf-i" role="group" aria-label="${E(x.t||"Trabajo")}">${L.map((p,k)=>`<img class="cf-s" src="${E(p)}" alt="${E(x.t||"Trabajo de dimka.cm")}">`).join("")}${L.length>1?`<span class="cf-sd">${L.map(()=>"<i></i>").join("")}</span><button class="cf-ib cf-ip" type="button" aria-label="Imagen anterior">‹</button><button class="cf-ib cf-in" type="button" aria-label="Imagen siguiente">›</button>`:""}${ok?`<a class="cf-l" href="${E(x.l)}" target="_blank" rel="noopener">${/reel/.test(x.l)?"▶ Ver reel":"Ver publicación"}</a>`:""}</div>`}).join("");
   const els=[...wrap.children],n=els.length,dots=$("#dots");
   dots.innerHTML=T.map((_,i)=>`<button type="button" aria-label="Trabajo ${i+1}"></button>`).join("");
   let a=0,sl=0;
@@ -236,12 +258,17 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
   const play=()=>{clearInterval(tm);if(!reduce&&n>1&&!hold&&vis)tm=setInterval(tick,2600)};
   const touch=()=>{hold=true;clearTimeout(ht);ht=setTimeout(()=>{hold=false;play()},9000);play()};
   els.forEach((el,i)=>el.addEventListener("click",()=>{if(i!==a){touch();go(i)}}));
+  els.forEach(el=>{const c=el.querySelectorAll(".cf-s").length,p=el.querySelector(".cf-ip"),q=el.querySelector(".cf-in");
+   if(p){p.onclick=e=>{e.stopPropagation();touch();sl=(sl-1+c)%c;draw()};q.onclick=e=>{e.stopPropagation();touch();sl=(sl+1)%c;draw()}}});
   box.querySelector(".cf-p").onclick=()=>{touch();go(a-1)};
   box.querySelector(".cf-n").onclick=()=>{touch();go(a+1)};
   dots.onclick=e=>{const i=[...dots.children].indexOf(e.target.closest("button"));if(i>=0){touch();go(i)}};
-  let x0=null;
-  box.addEventListener("pointerdown",e=>{x0=e.clientX});
-  box.addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>50){touch();go(a+(dx<0?1:-1))}});
+  let x0=null,tg=null;
+  box.addEventListener("pointerdown",e=>{if(e.target.closest(".cf-ib,.cf-l,.cf-b")){x0=null;return}x0=e.clientX;tg=e.target.closest(".cf-i")});
+  box.addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)<=50)return;touch();
+   const c=tg?tg.querySelectorAll(".cf-s").length:0;
+   if(tg&&tg===els[a]&&c>1){if(dx<0){if(sl<c-1){sl++;draw()}else go(a+1)}else{if(sl>0){sl--;draw()}else go(a-1)}}
+   else go(a+(dx<0?1:-1))});
   box.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){touch();go(a+1)}if(e.key==="ArrowLeft"){touch();go(a-1)}});
   box.addEventListener("mouseenter",()=>{hold=true;play()});
   box.addEventListener("mouseleave",()=>{hold=false;play()});
@@ -249,7 +276,7 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
   if(n<2){box.querySelectorAll(".cf-b").forEach(b=>b.style.display="none");dots.style.display="none"}
   draw();
  }else $("#trabajos").style.display="none";
- if(R.length)$("#quotes").innerHTML=R.map(x=>`<figure><blockquote>“${E(x.txt)}”</blockquote><figcaption>${E(x.n)}</figcaption></figure>`).join("");else{$("#rt2").style.display=$("#rl").style.display=$("#quotes").style.display="none";if(location.hash!=="#resenas")$("#resenas").style.display="none"}
+ if(R.length)$("#quotes").innerHTML=R.map(x=>{const ig=/^https?:\/\//.test(x.ig||"")?` · <a href="${E(x.ig)}" target="_blank" rel="noopener">Instagram</a>`:"";return `<figure><div class="rv-h">${x.foto?`<img class="av" src="${E(x.foto)}" alt="">`:`<span class="av">${E((x.n||"?").trim().charAt(0).toUpperCase())}</span>`}<div><figcaption>${E(x.n)}${ig}</figcaption></div></div><blockquote>“${E(x.txt)}”</blockquote></figure>`}).join("");else{$("#rt2").style.display=$("#rl").style.display=$("#quotes").style.display="none";if(location.hash!=="#resenas")$("#resenas").style.display="none"}
  $("#ig").href=D.ig;$("#mail").href="mailto:"+D.mail;$("#mail").textContent=D.mail;
 }).catch(e=>console.error("No se pudo cargar data.json",e));
 </script>
