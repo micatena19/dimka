@@ -37,21 +37,38 @@ function render(){
  h+="<h2>Planes</h2>"+D.planes.map((p,i)=>`<fieldset>${f("Nombre",`planes.${i}.n`)}${f("Precio",`planes.${i}.p`,1)}<label>Qué incluye (una línea por ítem)<textarea data-p="planes.${i}.items" data-l="1" rows="5">${esc(p.items.join("\n"))}</textarea></label></fieldset>`).join("");
  h+="<h2>Extras</h2>"+D.extras.map((e,i)=>`<fieldset>${f("Nombre",`extras.${i}.n`)}${f("Precio",`extras.${i}.p`,1)}</fieldset>`).join("");
  h+="<h2>Diseño web</h2>"+f("Título","web.t")+f("Texto","web.d")+f("Precio (texto)","web.p");
+ h+="<h2>Nuestro trabajo</h2><p>Subí fotos de tus trabajos. Se achican solas.</p>"+D.trabajos.map((x,i)=>`<fieldset><img src="${esc(x.img)}" alt="" style="max-width:120px;border-radius:10px">${f("Descripción corta",`trabajos.${i}.t`)}<button type="button" data-rm="trabajos" data-i="${i}">Quitar</button></fieldset>`).join("")+`<label>Agregar una foto<input type="file" id="up" accept="image/*"></label>`;
+ h+="<h2>Reseñas</h2>"+D.resenas.map((x,i)=>`<fieldset><label>Reseña<textarea data-p="resenas.${i}.txt" rows="3">${esc(x.txt)}</textarea></label>${f("Nombre de la marca",`resenas.${i}.n`)}<button type="button" data-rm="resenas" data-i="${i}">Quitar</button></fieldset>`).join("")+`<button type="button" id="addr">Agregar reseña</button>`;
  $("#form").innerHTML=h;
 }
+function collect(){document.querySelectorAll("[data-p]").forEach(el=>{const ks=el.dataset.p.split(".");const last=ks.pop();const o=ks.reduce((a,k)=>a[k],D);o[last]=el.dataset.l?el.value.split("\n").map(x=>x.trim()).filter(Boolean):el.type==="number"?Number(el.value):el.value})}
+async function subir(file){
+ say("Subiendo foto…");
+ const bm=await createImageBitmap(file);const k=Math.min(1,1200/Math.max(bm.width,bm.height));
+ const c=document.createElement("canvas");c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);
+ c.getContext("2d").drawImage(bm,0,0,c.width,c.height);
+ const path="img/trabajo-"+Date.now()+".jpg";
+ const r=await fetch(url().replace("data.json",path),{method:"PUT",headers:hd(),body:JSON.stringify({message:"Foto desde el panel",content:c.toDataURL("image/jpeg",.85).split(",")[1]})});
+ if(!r.ok)throw new Error("No se pudo subir la foto. Revisá el token.");
+ collect();D.trabajos.push({img:path,t:""});render();say("Foto subida. Tocá Guardar cambios para publicarla.");
+}
+$("#form").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.rm){collect();D[b.dataset.rm].splice(+b.dataset.i,1);render()}
+ if(b.id==="addr"){collect();D.resenas.push({txt:"",n:""});render()}};
+$("#form").onchange=e=>{if(e.target.id==="up"&&e.target.files[0])subir(e.target.files[0]).catch(x=>say(x.message))};
 $("#load").onclick=async()=>{
  try{say("Cargando…");
   const r=await fetch(url(),{headers:hd(),cache:"no-store"});
   if(!r.ok)throw new Error(r.status===404?"No encuentro data.json en ese repositorio.":"No pude conectar: revisá usuario, repositorio y token.");
   const j=await r.json();sha=j.sha;
-  D=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));
+  D=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));D.trabajos=D.trabajos||[];D.resenas=D.resenas||[];
   localStorage.setItem("cfg",JSON.stringify({u:$("#u").value,r:$("#r").value,t:$("#t").value}));
   render();$("#sv").hidden=false;say("Listo, ya podés editar.");
  }catch(e){say(e.message)}
 };
 $("#save").onclick=async()=>{
  try{say("Guardando…");
-  document.querySelectorAll("[data-p]").forEach(el=>{const ks=el.dataset.p.split(".");const last=ks.pop();const o=ks.reduce((a,k)=>a[k],D);o[last]=el.dataset.l?el.value.split("\n").map(x=>x.trim()).filter(Boolean):el.type==="number"?Number(el.value):el.value});
+  collect();
   const body={message:"Actualización desde el panel",sha,content:btoa(unescape(encodeURIComponent(JSON.stringify(D,null,1))))};
   const r=await fetch(url(),{method:"PUT",headers:hd(),body:JSON.stringify(body)});
   if(!r.ok)throw new Error("No se pudo guardar. Revisá que el token tenga permiso de escritura en Contents.");
