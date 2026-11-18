@@ -59,5 +59,32 @@
   "t": "Diseño web",
   "d": "Tu página hecha a medida, con un panel para que cambies textos y precios vos mismo.",
   "p": "A cotizar"
+ },
+ "trabajos": [],
+ "resenas": [],
+ "textos": {
+  "hero_sub": "redes y diseño para negocios con ganas de crecer",
+  "hero_txt": "Nos encargamos de tus redes para que vos te dediques a tu negocio.",
+  "serv_t": "Más que manejo de redes",
+  "serv_d": "Elegí lo que necesitás, con o sin plan mensual.",
+  "s1_t": "Redes sociales",
+  "s1_d": "Estrategia, contenido y publicación todos los meses.",
+  "s2_t": "Marca e identidad visual",
+  "s2_d": "Creamos o renovamos tu marca de punta a punta.",
+  "s3_t": "Edición de video",
+  "s3_d": "Piezas sueltas, sin plan. Desde $20.000.",
+  "s4_t": "Páginas web",
+  "s4_d": "Tu web con un panel para que la actualices vos.",
+  "plan_t": "Armá tu plan",
+  "plan_d": "Elegí un plan base, sumá lo que necesites y mirá el estimado al instante.",
+  "plan_n": "Todos los planes incluyen jornada presencial. Los formatos varían según la estrategia de cada mes. Es un estimado: el precio final se confirma después de hablar con vos.",
+  "marca_t": "Antes de pensar en el logo, revisá esto",
+  "marca_d": "Tildá lo que ya tenés claro. Diseñar una marca empieza por tener dirección.",
+  "trab_t": "Nuestro trabajo",
+  "trab_d": "Lo que hacemos<3",
+  "res_t": "Quienes confiaron en nosotras",
+  "res_d": "Marcas que confiaron en nosotras.",
+  "cont_t": "¿Hacemos crecer tu marca?",
+  "cont_d": "Contanos qué necesitás y te respondemos por WhatsApp o a dimkamkt@gmail.com."
  }
 }
