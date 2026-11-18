@@ -41,7 +41,7 @@
   {
    "id": "pieza",
    "n": "Pieza gráfica extra",
-   "p": 8
+   "p": 7000
   },
   {
    "id": "video",
@@ -53,6 +53,11 @@
    "n": "Identidad visual (pago único)",
    "p": 70000,
    "max": 1
+  },
+  {
+   "id": "x1795017633400",
+   "n": "Carruseles (hasta 6)",
+   "p": 30000
   }
  ],
  "web": {
