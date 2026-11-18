@@ -41,7 +41,7 @@
   {
    "id": "pieza",
    "n": "Pieza gráfica extra",
-   "p": 12000
+   "p": 8
   },
   {
    "id": "video",
@@ -119,6 +119,9 @@
  ],
  "resenas": [
   {
+   "foto": "",
+   "e": 5,
+   "ig": "",
    "txt": "",
    "n": ""
   }
