@@ -35,35 +35,36 @@ const f=(l,p,n)=>`<label>${l}<input data-p="${p}" ${n?'type="number"':""} value=
 function render(){
  let h="<h2>Contacto</h2>"+f("WhatsApp (con código de país, sin + ni espacios)","wa")+f("Instagram (link)","ig")+f("Mail","mail");
  h+="<h2>Planes</h2>"+D.planes.map((p,i)=>`<fieldset>${f("Nombre",`planes.${i}.n`)}${f("Precio",`planes.${i}.p`,1)}<label>Qué incluye (una línea por ítem)<textarea data-p="planes.${i}.items" data-l="1" rows="5">${esc(p.items.join("\n"))}</textarea></label></fieldset>`).join("");
- h+="<h2>Extras</h2>"+D.extras.map((e,i)=>`<fieldset>${f("Nombre",`extras.${i}.n`)}${f("Precio",`extras.${i}.p`,1)}</fieldset>`).join("");
+ h+="<h2>Extras</h2>"+D.extras.map((e,i)=>`<fieldset>${f("Nombre",`extras.${i}.n`)}${f("Precio",`extras.${i}.p`,1)}<button type="button" data-rm="extras" data-i="${i}">Quitar</button></fieldset>`).join("")+`<button type="button" id="adde">Agregar extra</button>`;
  h+="<h2>Diseño web</h2>"+f("Título","web.t")+f("Texto","web.d")+f("Precio (texto)","web.p");
  h+="<h2>Nuestro trabajo</h2><p>Subí fotos de tus trabajos. Se achican solas.</p>"+D.trabajos.map((x,i)=>`<fieldset><div>${x.imgs.map(p=>`<img src="${esc(p)}" alt="" style="width:80px;height:100px;object-fit:cover;border-radius:10px;margin:0 6px 6px 0">`).join("")}</div>${f("Descripción corta",`trabajos.${i}.t`)}${f("Link al reel o publicación (opcional)",`trabajos.${i}.l`)}<label>Sumar otra imagen a este trabajo (si es un carrusel)<input type="file" accept="image/*" data-add="${i}"></label><button type="button" data-rmimg="${i}">Quitar última imagen</button> <button type="button" data-rm="trabajos" data-i="${i}">Quitar trabajo</button></fieldset>`).join("")+`<label>Agregar un trabajo nuevo (elegí su primera imagen)<input type="file" id="up" accept="image/*"></label>`;
- h+="<h2>Reseñas</h2>"+D.resenas.map((x,i)=>`<fieldset><label>Reseña<textarea data-p="resenas.${i}.txt" rows="3">${esc(x.txt)}</textarea></label>${f("Nombre de la marca",`resenas.${i}.n`)}<button type="button" data-rm="resenas" data-i="${i}">Quitar</button></fieldset>`).join("")+`<button type="button" id="addr">Agregar reseña</button>`;
+ h+="<h2>Reseñas</h2>"+D.resenas.map((x,i)=>`<fieldset>${x.foto?`<img src="${esc(x.foto)}" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover">`:""}<label>Foto o logo de quien dejó la reseña (opcional)<input type="file" accept="image/*" data-rfoto="${i}"></label><label>Reseña<textarea data-p="resenas.${i}.txt" rows="3">${esc(x.txt)}</textarea></label>${f("Nombre y marca",`resenas.${i}.n`)}${f("Estrellas (1 a 5)",`resenas.${i}.e`,1)}${f("Link a su Instagram (opcional)",`resenas.${i}.ig`)}<button type="button" data-rm="resenas" data-i="${i}">Quitar</button></fieldset>`).join("")+`<button type="button" id="addr">Agregar reseña</button>`;
  h+="<h2>Textos de la página</h2><details><summary><b>Tocá para editar los textos</b></summary>"+Object.keys(DEF).map(k=>f(LAB[k],"textos."+k)).join("")+"</details>";
  $("#form").innerHTML=h;
 }
 function collect(){document.querySelectorAll("[data-p]").forEach(el=>{const ks=el.dataset.p.split(".");const last=ks.pop();const o=ks.reduce((a,k)=>a[k],D);o[last]=el.dataset.l?el.value.split("\n").map(x=>x.trim()).filter(Boolean):el.type==="number"?Number(el.value):el.value})}
-async function subir(file,at){
+async function subir(file,at,rs){
  say("Subiendo foto…");
- const bm=await createImageBitmap(file);const k=Math.min(1,1200/Math.max(bm.width,bm.height));
+ const bm=await createImageBitmap(file);const k=Math.min(1,(rs?300:1200)/Math.max(bm.width,bm.height));
  const c=document.createElement("canvas");c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);
  c.getContext("2d").drawImage(bm,0,0,c.width,c.height);
- const path="img/trabajo-"+Date.now()+".jpg";
+ const path=(rs?"img/resena-":"img/trabajo-")+Date.now()+".jpg";
  const r=await fetch(url().replace("data.json",path),{method:"PUT",headers:hd(),body:JSON.stringify({message:"Foto desde el panel",content:c.toDataURL("image/jpeg",.85).split(",")[1]})});
  if(!r.ok)throw new Error("No se pudo subir la foto. Revisá el token.");
- collect();if(at===undefined)D.trabajos.push({imgs:[path],img:path,t:"",l:""});else D.trabajos[at].imgs.push(path);render();say("Foto subida. Tocá Guardar cambios para publicarla.");
+ collect();if(rs)D.resenas[at].foto=path;else if(at===undefined)D.trabajos.push({imgs:[path],img:path,t:"",l:""});else D.trabajos[at].imgs.push(path);render();say("Foto subida. Tocá Guardar cambios para publicarla.");
 }
 $("#form").onclick=e=>{const b=e.target.closest("button");if(!b)return;
  if(b.dataset.rm){collect();D[b.dataset.rm].splice(+b.dataset.i,1);render()}
- if(b.id==="addr"){collect();D.resenas.push({txt:"",n:""});render()}
+ if(b.id==="adde"){collect();D.extras.push({id:"x"+Date.now(),n:"Nuevo extra",p:0});render()}
+ if(b.id==="addr"){collect();D.resenas.push({txt:"",n:"",e:5,foto:"",ig:""});render()}
  if(b.dataset.rmimg!==undefined){collect();const L=D.trabajos[+b.dataset.rmimg].imgs;if(L.length>1)L.pop();render()}};
-$("#form").onchange=e=>{const t=e.target,fl=t.files&&t.files[0];if(!fl)return;if(t.id==="up")subir(fl).catch(x=>say(x.message));else if(t.dataset.add!==undefined)subir(fl,+t.dataset.add).catch(x=>say(x.message))};
+$("#form").onchange=e=>{const t=e.target,fl=t.files&&t.files[0];if(!fl)return;if(t.id==="up")subir(fl).catch(x=>say(x.message));else if(t.dataset.rfoto!==undefined)subir(fl,+t.dataset.rfoto,true).catch(x=>say(x.message));else if(t.dataset.add!==undefined)subir(fl,+t.dataset.add).catch(x=>say(x.message))};
 $("#load").onclick=async()=>{
  try{say("Cargando…");
   const r=await fetch(url(),{headers:hd(),cache:"no-store"});
   if(!r.ok)throw new Error(r.status===404?"No encuentro data.json en ese repositorio.":"No pude conectar: revisá usuario, repositorio y token.");
   const j=await r.json();sha=j.sha;
-  D=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));D.trabajos=(D.trabajos||[]).map(x=>({l:"",t:"",...x,imgs:x.imgs||[x.img]}));D.resenas=D.resenas||[];D.textos={...DEF,...(D.textos||{})};
+  D=JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g,"")))));D.trabajos=(D.trabajos||[]).map(x=>({l:"",t:"",...x,imgs:x.imgs||[x.img]}));D.resenas=(D.resenas||[]).map(x=>({foto:"",e:5,ig:"",...x}));D.textos={...DEF,...(D.textos||{})};
   localStorage.setItem("cfg",JSON.stringify({u:$("#u").value,r:$("#r").value,t:$("#t").value}));
   render();$("#sv").hidden=false;say("Listo, ya podés editar.");
  }catch(e){say(e.message)}
