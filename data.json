@@ -117,7 +117,12 @@
    "img": "img/trabajo-1794966420141.jpg"
   }
  ],
- "resenas": [],
+ "resenas": [
+  {
+   "txt": "",
+   "n": ""
+  }
+ ],
  "textos": {
   "hero_sub": "redes y diseño para negocios con ganas de crecer",
   "hero_txt": "Nos encargamos de tus redes para que vos te dediques a tu negocio.",
