@@ -60,7 +60,20 @@
   "d": "Tu página hecha a medida, con un panel para que cambies textos y precios vos mismo.",
   "p": "A cotizar"
  },
- "trabajos": [],
+ "trabajos": [
+  {
+   "imgs": [
+    "img/trabajo-1794965064779.jpg",
+    "img/trabajo-1794965085512.jpg",
+    "img/trabajo-1794965102876.jpg",
+    "img/trabajo-1794965127677.jpg",
+    "img/trabajo-1794965149454.jpg"
+   ],
+   "img": "img/trabajo-1794965064779.jpg",
+   "t": "Carrusel dúo de amor",
+   "l": ""
+  }
+ ],
  "resenas": [],
  "textos": {
   "hero_sub": "redes y diseño para negocios con ganas de crecer",
