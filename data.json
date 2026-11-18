@@ -62,6 +62,8 @@
  },
  "trabajos": [
   {
+   "l": "https://www.instagram.com/p/DZiz7kojTJF/?gwpx=amRjNzhvMDZwa3U3",
+   "t": "Carrusel dúo de amor",
    "imgs": [
     "img/trabajo-1794965064779.jpg",
     "img/trabajo-1794965085512.jpg",
@@ -69,9 +71,7 @@
     "img/trabajo-1794965127677.jpg",
     "img/trabajo-1794965149454.jpg"
    ],
-   "img": "img/trabajo-1794965064779.jpg",
-   "t": "Carrusel dúo de amor",
-   "l": ""
+   "img": "img/trabajo-1794965064779.jpg"
   }
  ],
  "resenas": [],
