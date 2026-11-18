@@ -72,6 +72,31 @@ footer a{margin:0 .6rem}
 .steps li::before{content:counter(s);font:800 2rem "League Spartan",sans-serif;color:var(--pinky);display:block}
 .work{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .work>*{aspect-ratio:4/5;width:100%;object-fit:cover;border-radius:18px;background:var(--blush);display:grid;place-items:center;font:italic 500 1.1rem "Playfair Display",serif}
+.work a img{display:block;width:100%;height:100%;object-fit:cover;border-radius:18px}.work a:hover{opacity:.9}
+.cf{position:relative;height:min(95vw,520px);margin:0 -1.25rem;overflow:hidden;touch-action:pan-y;user-select:none}
+.cf-track{position:relative;height:100%;perspective:1200px}
+.cf-i{position:absolute;left:50%;top:0;height:100%;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--blush);transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s;cursor:pointer;box-shadow:0 12px 30px rgba(68,47,42,.18)}
+.cf-s{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s}
+.cf-s.on{opacity:1}
+.cf-sd{position:absolute;top:10px;left:0;right:0;display:flex;justify-content:center;gap:5px}
+.cf-sd i{width:18px;height:3px;border-radius:2px;background:rgba(255,255,255,.55)}
+.cf-sd i.on{background:#fff}
+.cf-l{display:none;position:absolute;left:12px;bottom:12px;background:var(--pinky);color:#fff;border-radius:999px;padding:.45rem .9rem;font:600 .85rem Montserrat,sans-serif;text-decoration:none}
+.cf-i.act .cf-l{display:inline-block}
+.cf-b{position:absolute;top:50%;transform:translateY(-50%);z-index:20;width:44px;height:44px;border-radius:50%;border:0;background:var(--cream);color:var(--brown);font:600 1.6rem/1 Montserrat,sans-serif;cursor:pointer;box-shadow:0 4px 12px rgba(68,47,42,.2)}
+.cf-p{left:.8rem}.cf-n{right:.8rem}
+.cf-dots{display:flex;justify-content:center;gap:.5rem;margin-top:1rem}
+.cf-dots button{width:10px;height:10px;border-radius:50%;border:0;background:var(--line);cursor:pointer;padding:0;transition:background .3s,transform .3s}
+.cf-dots button.on{background:var(--pinky);transform:scale(1.3)}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.js .rv.in{opacity:1;transform:none}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fl{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(18deg)}}
+.hero h1{animation:up .9s both}.hero p{animation:up .9s .15s both}.hero .btn{animation:up .9s .3s both}
+.stars svg{animation:fl 4.5s ease-in-out infinite}.stars svg:nth-child(2){animation-delay:-1.5s}.stars svg:nth-child(3){animation-delay:-3s}
+.btn{transition:transform .2s,background .2s}.btn:hover{transform:translateY(-2px)}
+.plan{transition:transform .2s,border-color .2s,background .2s}.plan:hover{transform:translateY(-3px)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.q svg{transition:none}html{scroll-behavior:auto}}
 </style>
 </head>
@@ -80,38 +105,38 @@ footer a{margin:0 .6rem}
 
 <section class="hero"><div>
 <h1>dimka</h1>
-<p class="serif" style="font-size:1.5rem">redes y diseño para negocios con ganas de crecer</p>
-<p>Nos encargamos de tus redes para que vos te dediques a tu negocio.</p>
+<p class="serif" style="font-size:1.5rem" data-t="hero_sub">redes y diseño para negocios con ganas de crecer</p>
+<p data-t="hero_txt">Nos encargamos de tus redes para que vos te dediques a tu negocio.</p>
 <a class="btn" href="#plan">Armá tu plan</a><a class="btn alt" href="#marca">Revisá tu marca</a>
 <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1l2.6 7.2 7.6.3-6 4.7 2.1 7.4L12 16.2 5.7 20.6l2.1-7.4-6-4.7 7.6-.3z"/></svg><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 0l2 9 10 3-10 3-2 9-2-9-10-3 10-3z"/></svg><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 1l2.6 7.2 7.6.3-6 4.7 2.1 7.4L12 16.2 5.7 20.6l2.1-7.4-6-4.7 7.6-.3z"/></svg></div>
 </div></section>
 
 <section id="servicios">
-<h2>Más que manejo de redes</h2>
-<p class="lead">Elegí lo que necesitás, con o sin plan mensual.</p>
+<h2 data-t="serv_t">Más que manejo de redes</h2>
+<p class="lead" data-t="serv_d">Elegí lo que necesitás, con o sin plan mensual.</p>
 <div class="benefits">
-<div><h3>Redes sociales</h3><p>Estrategia, contenido y publicación todos los meses.</p></div>
-<div><h3>Marca e identidad visual</h3><p>Creamos o renovamos tu marca de punta a punta.</p></div>
-<div><h3>Edición de video</h3><p>Piezas sueltas, sin plan. Desde $20.000.</p></div>
-<div><h3>Páginas web</h3><p>Tu web con un panel para que la actualices vos.</p></div>
+<div><h3 data-t="s1_t">Redes sociales</h3><p data-t="s1_d">Estrategia, contenido y publicación todos los meses.</p></div>
+<div><h3 data-t="s2_t">Marca e identidad visual</h3><p data-t="s2_d">Creamos o renovamos tu marca de punta a punta.</p></div>
+<div><h3 data-t="s3_t">Edición de video</h3><p data-t="s3_d">Piezas sueltas, sin plan. Desde $20.000.</p></div>
+<div><h3 data-t="s4_t">Páginas web</h3><p data-t="s4_d">Tu web con un panel para que la actualices vos.</p></div>
 </div>
 </section>
 
 <section id="plan">
-<h2>Armá tu plan</h2>
-<p class="lead">Elegí un plan base, sumá lo que necesites y mirá el estimado al instante.</p>
+<h2 data-t="plan_t">Armá tu plan</h2>
+<p class="lead" data-t="plan_d">Elegí un plan base, sumá lo que necesites y mirá el estimado al instante.</p>
 <div class="plans" id="plans" role="radiogroup" aria-label="Plan base"></div>
 <h3 style="margin-bottom:.4rem">Sumá extras</h3>
 <div id="extras"></div>
 <div class="total"><div>Estimado del primer mes<br><strong id="total">$0</strong></div><a class="btn" id="wa" href="#" target="_blank" rel="noopener">Pedir este plan por WhatsApp</a></div>
-<p class="note">Todos los planes incluyen jornada presencial. Los formatos varían según la estrategia de cada mes. Es un estimado: el precio final se confirma después de hablar con vos.</p>
+<p class="note" data-t="plan_n">Todos los planes incluyen jornada presencial. Los formatos varían según la estrategia de cada mes. Es un estimado: el precio final se confirma después de hablar con vos.</p>
 </section>
 
 <section id="web"><h2 id="wt"></h2><p class="lead" id="wd"></p><p style="margin-bottom:1.2rem"><b id="wp"></b></p><a class="btn" id="wa3" href="#" target="_blank" rel="noopener">Quiero mi web</a></section>
 
 <section class="check" id="marca"><div style="padding:4rem 1.25rem">
-<h2>Antes de pensar en el logo, revisá esto</h2>
-<p class="lead">Tildá lo que ya tenés claro. Diseñar una marca empieza por tener dirección.</p>
+<h2 data-t="marca_t">Antes de pensar en el logo, revisá esto</h2>
+<p class="lead" data-t="marca_d">Tildá lo que ya tenés claro. Diseñar una marca empieza por tener dirección.</p>
 <label class="q"><input type="checkbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1l2.6 7.2 7.6.3-6 4.7 2.1 7.4L12 16.2 5.7 20.6l2.1-7.4-6-4.7 7.6-.3z"/></svg><span><b>Sé qué quiero comunicar</b>No solo qué vendo, sino qué quiero transmitir.</span></label>
 <label class="q"><input type="checkbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1l2.6 7.2 7.6.3-6 4.7 2.1 7.4L12 16.2 5.7 20.6l2.1-7.4-6-4.7 7.6-.3z"/></svg><span><b>Sé cómo quiero que se perciba</b>¿Qué debería pensar o sentir alguien al verla?</span></label>
 <label class="q"><input type="checkbox"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1l2.6 7.2 7.6.3-6 4.7 2.1 7.4L12 16.2 5.7 20.6l2.1-7.4-6-4.7 7.6-.3z"/></svg><span><b>Tengo claro a quién quiero atraer</b>Solo entender con quién querés conectar.</span></label>
@@ -121,22 +146,23 @@ footer a{margin:0 .6rem}
 </div></section>
 
 <section id="trabajos">
-<h2>Nuestro trabajo</h2>
-<p class="lead">Lo que hacemos, de verdad.</p>
-<div class="work" id="work"></div>
+<h2 data-t="trab_t">Nuestro trabajo</h2>
+<p class="lead" data-t="trab_d">Lo que hacemos, de verdad.</p>
+<div class="cf" id="cf" tabindex="0" role="region" aria-roledescription="carrusel" aria-label="Nuestros trabajos"><div class="cf-track" id="work"></div><button class="cf-b cf-p" type="button" aria-label="Anterior">‹</button><button class="cf-b cf-n" type="button" aria-label="Siguiente">›</button></div>
+<div class="cf-dots" id="dots"></div>
 </section>
 
 <section id="resenas">
-<h2 id="rt2">Quienes confiaron en nosotras</h2>
-<p class="lead" id="rl">Marcas que ya crecen con nosotras.</p>
+<h2 id="rt2" data-t="res_t">Quienes confiaron en nosotras</h2>
+<p class="lead" id="rl" data-t="res_d">Marcas que confiaron en nosotras.</p>
 <div class="quotes" id="quotes"></div>
 <h3 style="margin:2.5rem 0 .6rem">Dejanos tu reseña</h3>
 <form id="rv"><input type="text" id="rn" placeholder="Tu nombre y tu marca" aria-label="Tu nombre y tu marca" required><textarea id="rt" rows="3" placeholder="¿Cómo fue trabajar con nosotras?" aria-label="Tu reseña" required></textarea><button class="btn" type="submit">Enviar reseña</button></form>
 </section>
 
 <section class="contact" id="contacto"><div style="padding:4rem 1.25rem">
-<h2>¿Hacemos crecer tu marca?</h2>
-<p>Contanos qué necesitás y te respondemos por WhatsApp o a dimkamkt@gmail.com.</p>
+<h2 data-t="cont_t">¿Hacemos crecer tu marca?</h2>
+<p data-t="cont_d">Contanos qué necesitás y te respondemos por WhatsApp o a dimkamkt@gmail.com.</p>
 <form id="f">
 <input type="text" id="n" placeholder="Tu nombre" aria-label="Tu nombre" required>
 <textarea id="m" rows="4" placeholder="Contanos sobre tu marca" aria-label="Contanos sobre tu marca"></textarea>
@@ -149,6 +175,9 @@ footer a{margin:0 .6rem}
 <script>
 const $=s=>document.querySelector(s);
 const fmt=n=>"$"+n.toLocaleString("es-AR");
+document.documentElement.classList.add("js");
+{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll("section:not(.hero)").forEach(el=>{el.classList.add("rv");io.observe(el)})}
 fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
  const wa=t=>`https://wa.me/${D.wa}?text=`+encodeURIComponent(t);
  let plan=D.planes[0].id;const qty={};
@@ -174,10 +203,53 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
  $("#wa3").href=wa("Hola! Quiero consultar por una página web.");
  $("#f").addEventListener("submit",e=>{e.preventDefault();window.open(wa(`Hola! Soy ${$("#n").value}. ${$("#m").value}`),"_blank")});
  $("#rv").addEventListener("submit",e=>{e.preventDefault();location.href=`mailto:${D.mail}?subject=`+encodeURIComponent("Reseña para dimka.cm")+"&body="+encodeURIComponent($("#rt").value+"\n\n"+$("#rn").value)});
+ const TX=D.textos||{};document.querySelectorAll("[data-t]").forEach(el=>{const v=TX[el.dataset.t];if(v)el.textContent=v});
  const E=v=>String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
  const T=D.trabajos||[],R=D.resenas||[];
- if(T.length)$("#work").innerHTML=T.map(x=>`<img src="${E(x.img)}" alt="${E(x.t||"Trabajo de dimka.cm")}">`).join("");else $("#trabajos").style.display="none";
- if(R.length)$("#quotes").innerHTML=R.map(x=>`<figure><blockquote>“${E(x.txt)}”</blockquote><figcaption>${E(x.n)}</figcaption></figure>`).join("");else{$("#rt2").style.display=$("#rl").style.display=$("#quotes").style.display="none"}
+ if(T.length){
+  const wrap=$("#work"),box=$("#cf");
+  wrap.innerHTML=T.map(x=>{const L=x.imgs&&x.imgs.length?x.imgs:[x.img];const ok=/^https?:\/\//.test(x.l||"");
+   return `<div class="cf-i" role="group" aria-label="${E(x.t||"Trabajo")}">${L.map((p,k)=>`<img class="cf-s" src="${E(p)}" alt="${E(x.t||"Trabajo de dimka.cm")}">`).join("")}${L.length>1?`<span class="cf-sd">${L.map(()=>"<i></i>").join("")}</span>`:""}${ok?`<a class="cf-l" href="${E(x.l)}" target="_blank" rel="noopener">${/reel/.test(x.l)?"▶ Ver reel":"Ver publicación"}</a>`:""}</div>`}).join("");
+  const els=[...wrap.children],n=els.length,dots=$("#dots");
+  dots.innerHTML=T.map((_,i)=>`<button type="button" aria-label="Trabajo ${i+1}"></button>`).join("");
+  let a=0,sl=0;
+  function draw(){
+   els.forEach((el,i)=>{
+    let d=((i-a)%n+n)%n;if(d>n/2)d-=n;
+    const ab=Math.abs(d),jump=el._d===undefined||Math.abs(d-el._d)>2;el._d=d;
+    if(jump)el.style.transition="none";
+    el.style.transform=`translateX(${-50+d*60}%) scale(${1-ab*.2}) rotateY(${-d*14}deg)`;
+    el.style.opacity=ab>2?0:[1,.55,.25][ab];
+    el.style.zIndex=10-ab;
+    el.style.pointerEvents=ab>2?"none":"auto";
+    if(jump){void el.offsetWidth;el.style.transition=""}
+    el.classList.toggle("act",d===0);
+    el.querySelectorAll(".cf-s").forEach((im,k)=>im.classList.toggle("on",k===(d===0?sl:0)));
+    el.querySelectorAll(".cf-sd i").forEach((q,k)=>q.classList.toggle("on",k===(d===0?sl:0)));
+   });
+   [...dots.children].forEach((b,i)=>b.classList.toggle("on",i===a));
+  }
+  const go=i=>{a=(i+n)%n;sl=0;draw()};
+  let tm,hold=false,vis=false,ht;
+  const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  const tick=()=>{const c=els[a].querySelectorAll(".cf-s").length;if(sl<c-1){sl++;draw()}else go(a+1)};
+  const play=()=>{clearInterval(tm);if(!reduce&&n>1&&!hold&&vis)tm=setInterval(tick,2600)};
+  const touch=()=>{hold=true;clearTimeout(ht);ht=setTimeout(()=>{hold=false;play()},9000);play()};
+  els.forEach((el,i)=>el.addEventListener("click",()=>{if(i!==a){touch();go(i)}}));
+  box.querySelector(".cf-p").onclick=()=>{touch();go(a-1)};
+  box.querySelector(".cf-n").onclick=()=>{touch();go(a+1)};
+  dots.onclick=e=>{const i=[...dots.children].indexOf(e.target.closest("button"));if(i>=0){touch();go(i)}};
+  let x0=null;
+  box.addEventListener("pointerdown",e=>{x0=e.clientX});
+  box.addEventListener("pointerup",e=>{if(x0===null)return;const dx=e.clientX-x0;x0=null;if(Math.abs(dx)>50){touch();go(a+(dx<0?1:-1))}});
+  box.addEventListener("keydown",e=>{if(e.key==="ArrowRight"){touch();go(a+1)}if(e.key==="ArrowLeft"){touch();go(a-1)}});
+  box.addEventListener("mouseenter",()=>{hold=true;play()});
+  box.addEventListener("mouseleave",()=>{hold=false;play()});
+  new IntersectionObserver(es=>{vis=es[0].isIntersecting;play()},{threshold:.3}).observe(box);
+  if(n<2){box.querySelectorAll(".cf-b").forEach(b=>b.style.display="none");dots.style.display="none"}
+  draw();
+ }else $("#trabajos").style.display="none";
+ if(R.length)$("#quotes").innerHTML=R.map(x=>`<figure><blockquote>“${E(x.txt)}”</blockquote><figcaption>${E(x.n)}</figcaption></figure>`).join("");else{$("#rt2").style.display=$("#rl").style.display=$("#quotes").style.display="none";if(location.hash!=="#resenas")$("#resenas").style.display="none"}
  $("#ig").href=D.ig;$("#mail").href="mailto:"+D.mail;$("#mail").textContent=D.mail;
 }).catch(e=>console.error("No se pudo cargar data.json",e));
 </script>
