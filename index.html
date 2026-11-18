@@ -123,19 +123,13 @@ footer a{margin:0 .6rem}
 <section id="trabajos">
 <h2>Nuestro trabajo</h2>
 <p class="lead">Lo que hacemos, de verdad.</p>
-<div class="work"><!-- Reemplazá cada bloque por <img src="img/trabajo1.jpg" alt="Descripción"> -->
-<div>Tu trabajo acá</div><div>Tu trabajo acá</div><div>Tu trabajo acá</div>
-</div>
+<div class="work" id="work"></div>
 </section>
 
 <section id="resenas">
-<h2>Quienes confiaron en nosotras</h2>
-<p class="lead">Marcas que ya crecen con nosotras.</p>
-<div class="quotes">
-<figure><blockquote>“Reemplazá este texto con el testimonio real de tu primer cliente.”</blockquote><figcaption>Nombre de la marca</figcaption></figure>
-<figure><blockquote>“Acá va lo que dijo tu segundo cliente sobre trabajar con ustedes.”</blockquote><figcaption>Nombre de la marca</figcaption></figure>
-<figure><blockquote>“Y acá el tercero. Podés sumar su logo o su usuario de Instagram.”</blockquote><figcaption>Nombre de la marca</figcaption></figure>
-</div>
+<h2 id="rt2">Quienes confiaron en nosotras</h2>
+<p class="lead" id="rl">Marcas que ya crecen con nosotras.</p>
+<div class="quotes" id="quotes"></div>
 <h3 style="margin:2.5rem 0 .6rem">Dejanos tu reseña</h3>
 <form id="rv"><input type="text" id="rn" placeholder="Tu nombre y tu marca" aria-label="Tu nombre y tu marca" required><textarea id="rt" rows="3" placeholder="¿Cómo fue trabajar con nosotras?" aria-label="Tu reseña" required></textarea><button class="btn" type="submit">Enviar reseña</button></form>
 </section>
@@ -180,6 +174,10 @@ fetch("data.json",{cache:"no-store"}).then(r=>r.json()).then(D=>{
  $("#wa3").href=wa("Hola! Quiero consultar por una página web.");
  $("#f").addEventListener("submit",e=>{e.preventDefault();window.open(wa(`Hola! Soy ${$("#n").value}. ${$("#m").value}`),"_blank")});
  $("#rv").addEventListener("submit",e=>{e.preventDefault();location.href=`mailto:${D.mail}?subject=`+encodeURIComponent("Reseña para dimka.cm")+"&body="+encodeURIComponent($("#rt").value+"\n\n"+$("#rn").value)});
+ const E=v=>String(v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+ const T=D.trabajos||[],R=D.resenas||[];
+ if(T.length)$("#work").innerHTML=T.map(x=>`<img src="${E(x.img)}" alt="${E(x.t||"Trabajo de dimka.cm")}">`).join("");else $("#trabajos").style.display="none";
+ if(R.length)$("#quotes").innerHTML=R.map(x=>`<figure><blockquote>“${E(x.txt)}”</blockquote><figcaption>${E(x.n)}</figcaption></figure>`).join("");else{$("#rt2").style.display=$("#rl").style.display=$("#quotes").style.display="none"}
  $("#ig").href=D.ig;$("#mail").href="mailto:"+D.mail;$("#mail").textContent=D.mail;
 }).catch(e=>console.error("No se pudo cargar data.json",e));
 </script>
